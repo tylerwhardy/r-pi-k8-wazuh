@@ -1,0 +1,54 @@
+Following this guide: 
+https://ubuntu.com/tutorials/how-to-kubernetes-cluster-on-raspberry-pi#1-overview
+
+https://microk8s.io/docs/external-lma
+
+https://documentation.wazuh.com/current/installation-guide/open-distro/distributed-deployment/unattended/unattended-elasticsearch-cluster-installation.html
+
+https://www.elastic.co/guide/en/elasticsearch/reference/8.0/modules-discovery-bootstrap-cluster.html
+
+https://documentation.wazuh.com/current/deploying-with-kubernetes/kubernetes-conf.html
+
+
+
+sudo nano /boot/firmware/cmdline.txt
+cgroup_enable=memory cgroup_memory=1 net.ifnames=0 dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 root=LABEL=writable rootfstype=ext4 elevator=deadline rootwait fixrtc
+
+Change your hostname on each device to the new kube1,2,3,4 etc scheme
+sudo nano /etc/hostname
+
+Validate nothing else needs to be done
+
+sudo apt install curl unzip wget apache2
+
+
+sudo nano /etc/hosts
+sudo apt update
+sudo apt update
+reboot
+ip a
+Write down your MAC address and IP address. Set up a stack IP address.
+
+sudo snap install microk8s --classic
+sudo microk8s.add-node
+join each node using that code
+curl -so ~/elastic-stack-installation.sh https://packages.wazuh.com/resoruces/4.2/open-distro/unattended-installation/distributed/elastic-stack-installation.sh
+curl -so ~/config.yml https://packages.wazuh.com/resources/4.2/open-distro/unattended-installation/distributed/templates/config_cluster.yml
+
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+sudo apt update
+sudo apt 
+sudo apt install elasticsearch
+
+
+
+sudo bash ~/elastic-stack-installation.sh -e -c -n kube1
+
+
+
+    eval "curl -so ~/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip --max-time 300 ${debug}"
+    eval "unzip ~/search-guard-tlstool-1.8.zip -d ~/searchguard ${debug}"
+    eval "curl -so ~/searchguard/search-guard.yml https://packages.wazuh.com/resources/4.2/open-distro/unattended-installation/distributed/templates/search-guard-unattended.yml --max-time 300 ${debug}"
+
+
